@@ -19,15 +19,11 @@
  */
 package mod.gottsch.neo.gottschcore.biome;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.biome.BiomeSources;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
 
 /**
  * @author Mark Gottschling on May 8, 2017
@@ -39,9 +35,9 @@ public class BiomeHelper {
 		OK,
 		WHITE_LISTED,
 		BLACK_LISTED
-	};
+	}
 
-	/**
+    /**
 	 * 
 	 * @param biome
 	 * @param whiteList
