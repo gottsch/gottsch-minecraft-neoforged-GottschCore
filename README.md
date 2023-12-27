@@ -1,3 +1,2 @@
-![](./GottschCore1.12/src/resources/gottschcore-logo.png)
-# gottsch-minecraft-GottschCore
+# gottsch-minecraft-neoforged-GottschCore
 The base code that all my mods require.
