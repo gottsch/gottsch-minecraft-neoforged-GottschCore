@@ -19,13 +19,13 @@
  */
 package mod.gottsch.neo.gottschcore.bst;
 
-import java.util.function.Supplier;
-
 import mod.gottsch.neo.gottschcore.spatial.Coords;
 import mod.gottsch.neo.gottschcore.spatial.ICoords;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.common.util.INBTSerializable;
+
+import java.util.function.Supplier;
 
 /**
  * 

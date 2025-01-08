@@ -19,8 +19,7 @@
  */
 package mod.gottsch.neo.gottschcore.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
  * 
@@ -33,11 +32,11 @@ public abstract class AbstractConfig implements IConfig {
 	 * 
 	 */
 	public static class Logging {
-		public ConfigValue<String> level;
-		public ConfigValue<String> folder;
-		public ConfigValue<String> size;
+		public ModConfigSpec.ConfigValue<String> level;
+		public ModConfigSpec.ConfigValue<String> folder;
+		public ModConfigSpec.ConfigValue<String> size;
 
-		public Logging(final ForgeConfigSpec.Builder builder) {
+		public Logging(final ModConfigSpec.Builder builder) {
 			builder.comment(CATEGORY_DIV, " Logging properties", CATEGORY_DIV).push(LOGGING_CATEGORY);
 
 			level = builder

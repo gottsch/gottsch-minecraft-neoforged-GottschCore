@@ -20,7 +20,7 @@
 package mod.gottsch.neo.gottschcore.setup;
 
 import mod.gottsch.neo.gottschcore.config.IConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
  * 

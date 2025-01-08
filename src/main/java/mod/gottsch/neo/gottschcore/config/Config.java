@@ -1,8 +1,9 @@
 package mod.gottsch.neo.gottschcore.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.config.ModConfig;
+
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
  * 
@@ -32,7 +33,7 @@ public class Config extends AbstractConfig {
 	 * 
 	 */
 	private static void registerCommonConfigs() {
-		ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+		ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
 		CommonConfig.LOGGING = new Logging(COMMON_BUILDER);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_BUILDER.build());
 	}

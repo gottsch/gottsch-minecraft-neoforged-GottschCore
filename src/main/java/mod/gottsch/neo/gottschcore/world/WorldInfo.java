@@ -36,8 +36,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
 
 /**
  * @author Mark Gottschling on May 6, 2017
@@ -308,19 +308,7 @@ public class WorldInfo {
 		}
 		return spawnCoords;
 	}
-	
-	/**
-	 * TESTING
-	 * @param level
-	 * @param generator
-	 * @param coords
-	 * @return
-	 */
-	@Deprecated
-	// use Optional<ICoords>
-	public static ICoords getDryLandSurfaceCoordsWG(IWorldGenContext context, final ICoords coords) {
-		return getDryLandSurfaceCoords(context.level(), context.chunkGenerator(), Heightmap.Types.WORLD_SURFACE_WG, coords);
-	}
+
 	
 	/**
 	 * 
@@ -387,8 +375,8 @@ public class WorldInfo {
 	 * Gets the first valid land surface position (could be under water or lava)
 	 * from the given starting point.
 	 * 
-	 * @param world
-	 * @param pos
+	 * @param level
+	 * @param generator
 	 * @return
 	 */
 	public static ICoords getAnyLandSurfaceCoords(final ServerLevelAccessor level, final ChunkGenerator generator, final ICoords coords) {		
@@ -428,7 +416,7 @@ public class WorldInfo {
 
 	/**
 	 * 
-	 * @param world
+	 * @param level
 	 * @param generator
 	 * @param coords
 	 * @return
