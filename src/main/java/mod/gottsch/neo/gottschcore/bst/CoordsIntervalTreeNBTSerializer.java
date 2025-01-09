@@ -21,6 +21,7 @@ package mod.gottsch.neo.gottschcore.bst;
 
 import mod.gottsch.neo.gottschcore.spatial.Coords;
 import mod.gottsch.neo.gottschcore.spatial.ICoords;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.neoforged.neoforge.common.util.INBTSerializable;
@@ -47,12 +48,12 @@ public class CoordsIntervalTreeNBTSerializer<D extends INBTSerializable<Tag>> {
 		this.dataSupplier = dataSupplier;
 	}
 	
-	public void save(CoordsIntervalTree<D> tree, CompoundTag tag, String tagName) {
+	public void save(CoordsIntervalTree<D> tree, CompoundTag tag, String tagName, HolderLookup.Provider registries) {
 		if (tree.getRoot() == null) {
 			return;
 		}		
 		CompoundTag rootNbt = new CompoundTag();
-		save((CoordsInterval<D>)tree.getRoot(), rootNbt);
+		save((CoordsInterval<D>)tree.getRoot(), rootNbt, registries);
 		tag.put(tagName, rootNbt);
 	}
 	
@@ -61,7 +62,7 @@ public class CoordsIntervalTreeNBTSerializer<D extends INBTSerializable<Tag>> {
 	 * @param interval
 	 * @param tag
 	 */
-	private void save(CoordsInterval<D> interval, CompoundTag tag) {	
+	private void save(CoordsInterval<D> interval, CompoundTag tag, HolderLookup.Provider registries) {
 		CompoundTag coordsNbt1 = new CompoundTag();
 		CompoundTag coordsNbt2 = new CompoundTag();
 		
@@ -75,19 +76,19 @@ public class CoordsIntervalTreeNBTSerializer<D extends INBTSerializable<Tag>> {
 		tag.putInt(MAX_KEY, interval.getMax());
 		
 		if (interval.getData() != null) {
-			Tag dataNbt =interval.getData().serializeNBT();
+			Tag dataNbt =interval.getData().serializeNBT(registries);
 			tag.put(DATA_KEY, dataNbt);
 		}
 		
 		if (interval.getLeft() != null) {
 			CompoundTag left = new CompoundTag();
-			save((CoordsInterval<D>)interval.getLeft(), left);
+			save((CoordsInterval<D>)interval.getLeft(), left, registries);
 			tag.put(LEFT_KEY, left);
 		}
 
 		if (interval.getRight() != null) {
 			CompoundTag right = new CompoundTag();
-			save((CoordsInterval<D>)interval.getRight(), right);
+			save((CoordsInterval<D>)interval.getRight(), right, registries);
 			tag.put(RIGHT_KEY, right);
 		}
 	}
@@ -98,11 +99,11 @@ public class CoordsIntervalTreeNBTSerializer<D extends INBTSerializable<Tag>> {
 	 * @param tagName
 	 * @return
 	 */
-	public synchronized CoordsIntervalTree<D> load(CompoundTag tag, String tagName) {
+	public synchronized CoordsIntervalTree<D> load(CompoundTag tag, String tagName, HolderLookup.Provider registries) {
 		CoordsIntervalTree<D> tree = new CoordsIntervalTree<>();
 		
 		CompoundTag rootNbt = tag.getCompound(tagName);
-		CoordsInterval<D> root = load(rootNbt);
+		CoordsInterval<D> root = load(rootNbt, registries);
 		if (root != null && !root.isEmpty()) {
 			tree.setRoot(root);
 		}
@@ -114,7 +115,7 @@ public class CoordsIntervalTreeNBTSerializer<D extends INBTSerializable<Tag>> {
 	 * @param tag
 	 * @return
 	 */
-	private synchronized CoordsInterval<D> load(CompoundTag tag) {
+	private synchronized CoordsInterval<D> load(CompoundTag tag, HolderLookup.Provider registries) {
 		CoordsInterval<D> interval = new CoordsInterval<D>();
 		
 		ICoords c1 = CoordsInterval.EMPTY.getCoords1();
@@ -137,19 +138,19 @@ public class CoordsIntervalTreeNBTSerializer<D extends INBTSerializable<Tag>> {
 		
 		if (tag.contains(DATA_KEY) && dataSupplier != null) {
 			D data = getDataSupplier().get();
-			data.deserializeNBT(tag);
+			data.deserializeNBT(registries, tag);
 			interval.setData(data);
 		}
 		
 		if (tag.contains(LEFT_KEY)) {
-			CoordsInterval<D> left = load((CompoundTag) tag.get(LEFT_KEY));
+			CoordsInterval<D> left = load((CompoundTag) tag.get(LEFT_KEY), registries);
 			if (!left.isEmpty()) {
 				interval.setLeft(left);
 			}
 		}
 		
 		if (tag.contains(RIGHT_KEY)) {
-			CoordsInterval<D> right = load((CompoundTag) tag.get(RIGHT_KEY));
+			CoordsInterval<D> right = load((CompoundTag) tag.get(RIGHT_KEY), registries);
 			if (!right.isEmpty()) {
 				interval.setLeft(right);
 			}

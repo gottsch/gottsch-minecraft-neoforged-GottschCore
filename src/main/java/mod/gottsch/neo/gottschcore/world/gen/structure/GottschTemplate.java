@@ -1,16 +1,10 @@
 package mod.gottsch.neo.gottschcore.world.gen.structure;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
-
 import mod.gottsch.neo.gottschcore.GottschCore;
 import mod.gottsch.neo.gottschcore.spatial.Coords;
 import mod.gottsch.neo.gottschcore.spatial.ICoords;
@@ -38,6 +32,10 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BitSetDiscreteVoxelShape;
 import net.minecraft.world.phys.shapes.DiscreteVoxelShape;
+
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -234,7 +232,7 @@ public class GottschTemplate extends StructureTemplate {
 									if (tileentity1 instanceof RandomizableContainerBlockEntity) {
 										blockInfo.nbt.putLong("LootTableSeed", random.nextLong());
 									}
-									tileentity1.load(blockInfo.nbt);
+									tileentity1.loadWithComponents(blockInfo.nbt, world.registryAccess());
 								}
 							}
 
@@ -424,7 +422,7 @@ public class GottschTemplate extends StructureTemplate {
 									processed.nbt.putLong("LootTableSeed", random.nextLong());
 								}
 
-								tileentity1.load(processed.nbt);
+								tileentity1.loadWithComponents(processed.nbt, world.registryAccess());
 							}
 						}
 
@@ -578,7 +576,7 @@ public class GottschTemplate extends StructureTemplate {
 					f = f + (p_242927_6_.getYRot() - p_242927_6_.rotate(placementIn.getRotation()));
 					p_242927_6_.moveTo(vector3d1.x, vector3d1.y, vector3d1.z, f, p_242927_6_.getXRot());
 					if (placementIn.shouldFinalizeEntities() && p_242927_6_ instanceof Mob) {
-						((Mob)p_242927_6_).finalizeSpawn(p_237143_1_, p_237143_1_.getCurrentDifficultyAt(new BlockPos(vec3i)), MobSpawnType.STRUCTURE, (SpawnGroupData)null, CompoundTag);
+						((Mob)p_242927_6_).finalizeSpawn(p_237143_1_, p_237143_1_.getCurrentDifficultyAt(new BlockPos(vec3i)), MobSpawnType.STRUCTURE, (SpawnGroupData)null);
 					}
 
 					p_237143_1_.addFreshEntityWithPassengers(p_242927_6_);
@@ -780,7 +778,7 @@ public class GottschTemplate extends StructureTemplate {
 	/**
 	 * Wrapper for transform(BlockPos, Mirror, Rotation, BlockPos)
 	 * 
-	 * @param placementIn
+	 * @param placement
 	 * @param coords
 	 * @return
 	 */

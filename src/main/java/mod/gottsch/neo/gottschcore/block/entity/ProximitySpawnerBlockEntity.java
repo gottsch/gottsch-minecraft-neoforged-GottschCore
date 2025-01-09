@@ -7,6 +7,7 @@ import mod.gottsch.neo.gottschcore.spatial.Coords;
 import mod.gottsch.neo.gottschcore.spatial.ICoords;
 import mod.gottsch.neo.gottschcore.world.WorldInfo;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -22,7 +24,7 @@ import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.DungeonHooks;
+import net.neoforged.neoforge.common.MonsterRoomHooks;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
@@ -57,15 +59,16 @@ public class ProximitySpawnerBlockEntity extends AbstractProximityBlockEntity {
 	 * 
 	 */
 	@Override
-	public void load(CompoundTag tag) {
-		super.load(tag);
+	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.loadAdditional(tag, registries);
 		try {
 			// read the custom name
 			if (tag.contains(MOB_NAME, 8)) {
 				this.mobName = new ResourceLocation(tag.getString(MOB_NAME));
 			} else {
 				// select a random mob
-				EntityType<?> entityType = DungeonHooks.getRandomDungeonMob(this.level.random);
+				EntityType<?> entityType = MonsterRoomHooks.getRandomMonsterRoomMob(level.getRandom());
+
 				this.mobName = EntityType.getKey(entityType);
 			}
 			if (getMobName() == null || StringUtils.isBlank(getMobName().toString())) {
@@ -91,8 +94,8 @@ public class ProximitySpawnerBlockEntity extends AbstractProximityBlockEntity {
 	 * 
 	 */
 	@Override
-	protected void saveAdditional(CompoundTag tag) {
-		super.saveAdditional(tag);
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.saveAdditional(tag, registries);
 		if (getMobName() == null || StringUtils.isBlank(getMobName().toString())) {        	
 			defaultMobSpawnerSettings();
 		}
@@ -175,8 +178,9 @@ public class ProximitySpawnerBlockEntity extends AbstractProximityBlockEntity {
 
 				boolean isSpawned = false;
 				if (!WorldInfo.isClientSide(level)) {
-					SpawnPlacements.Type placement = SpawnPlacements.getPlacementType(entityType.get());
-					if (NaturalSpawner.isSpawnPositionOk(placement, level, spawnCoords.toPos(), entityType.get())) {
+					SpawnPlacementType placement = SpawnPlacements.getPlacementType(entityType.get());
+					BlockState state = level.getBlockState(spawnCoords.toPos());
+					if (NaturalSpawner.isValidEmptySpawnBlock(level, spawnCoords.toPos(), state, state.getFluidState(), entityType.get())) {
 						Entity mob = entityType.get().create(level);
 						mob.setPos((double)spawnX, (double)spawnY, (double)spawnZ);
 						level.addFreshEntityWithPassengers(mob);
