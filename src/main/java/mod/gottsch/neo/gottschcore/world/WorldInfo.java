@@ -51,9 +51,9 @@ public class WorldInfo {
 	public static final int CHUNK_RADIUS = 8;
 	public static final int CHUNK_SIZE = CHUNK_RADIUS * 2;
 
-	public static final ResourceLocation OVERWORLD = new ResourceLocation("overworld");
-	public static final ResourceLocation THE_NETHER = new ResourceLocation("the_nether");
-	public static final ResourceLocation THE_END = new ResourceLocation("the_end");
+	public static final ResourceLocation OVERWORLD = ResourceLocation.withDefaultNamespace("overworld");
+	public static final ResourceLocation THE_NETHER = ResourceLocation.withDefaultNamespace("the_nether");
+	public static final ResourceLocation THE_END = ResourceLocation.withDefaultNamespace("the_end");
 
 	public enum SURFACE {
 		LAND, WATER, LAVA, OTHER, INVALID

@@ -22,9 +22,9 @@ package mod.gottsch.neo.gottschcore;
 import mod.gottsch.neo.gottschcore.config.Config;
 import mod.gottsch.neo.gottschcore.setup.CommonSetup;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,14 +43,12 @@ public class GottschCore {
 	
 	public static GottschCore instance;
 
-	public GottschCore() {
+	public GottschCore(IEventBus modEventBus, ModContainer modContainer) {
 		GottschCore.instance = this;
 
 		// register config
-		Config.register();
+		Config.register(modContainer);
 
-		// register the setup method for mod loading
-		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		// register 'ModSetup::init' to be called at mod setup time (server and client)
 		modEventBus.addListener(this::setup);
 	}

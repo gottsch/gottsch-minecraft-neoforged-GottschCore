@@ -20,8 +20,6 @@
 package mod.gottsch.neo.gottschcore.biome;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 
@@ -42,7 +40,7 @@ public class BiomeHelper {
 	public static Result isBiomeAllowed(Holder<Biome> biome, List<? extends String> whiteList, List<? extends String> blackList) {
 		if (whiteList != null && !whiteList.isEmpty()) {
 			for (String biomeName : whiteList) {
-				if (biome.is(new ResourceLocation(biomeName))) {
+				if (biome.is(ResourceLocation.parse(biomeName))) {
 					return Result.WHITE_LISTED;
 				}
 			}
@@ -52,7 +50,7 @@ public class BiomeHelper {
 
 		if (blackList != null && !blackList.isEmpty()) {
 			for (String biomeName : blackList) {
-				if (biome.is(new ResourceLocation(biomeName))) {
+				if (biome.is(ResourceLocation.parse(biomeName))) {
 					return Result.BLACK_LISTED;
 				}
 			}

@@ -64,7 +64,7 @@ public class ProximitySpawnerBlockEntity extends AbstractProximityBlockEntity {
 		try {
 			// read the custom name
 			if (tag.contains(MOB_NAME, 8)) {
-				this.mobName = new ResourceLocation(tag.getString(MOB_NAME));
+				this.mobName = ResourceLocation.parse(tag.getString(MOB_NAME));
 			} else {
 				// select a random mob
 				EntityType<?> entityType = MonsterRoomHooks.getRandomMonsterRoomMob(level.getRandom());
@@ -108,7 +108,7 @@ public class ProximitySpawnerBlockEntity extends AbstractProximityBlockEntity {
 	 * 
 	 */
 	private void defaultMobSpawnerSettings() {
-		setMobName(new ResourceLocation("minecraft", "zombie"));
+		setMobName(ResourceLocation.fromNamespaceAndPath("minecraft", "zombie"));
 		setMobNum(new DoubleRange(1, 1));
 		setProximity(5.0D);
 	}

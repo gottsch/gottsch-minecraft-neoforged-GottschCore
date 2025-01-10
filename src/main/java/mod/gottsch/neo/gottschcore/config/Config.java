@@ -1,7 +1,7 @@
 package mod.gottsch.neo.gottschcore.config;
 
 
-import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -19,8 +19,8 @@ public class Config extends AbstractConfig {
 	/**
 	 * 
 	 */
-	public static void register() {
-		registerCommonConfigs();
+	public static void register(ModContainer modContainer) {
+		registerCommonConfigs(modContainer);
 		// perform any initializations on data
 		Config.init();
 	}
@@ -32,10 +32,10 @@ public class Config extends AbstractConfig {
 	/**
 	 * 
 	 */
-	private static void registerCommonConfigs() {
+	private static void registerCommonConfigs(ModContainer modContainer) {
 		ModConfigSpec.Builder COMMON_BUILDER = new ModConfigSpec.Builder();
 		CommonConfig.LOGGING = new Logging(COMMON_BUILDER);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_BUILDER.build());
+		modContainer.registerConfig(ModConfig.Type.COMMON, COMMON_BUILDER.build());
 	}
 	
 	private static void init() {
