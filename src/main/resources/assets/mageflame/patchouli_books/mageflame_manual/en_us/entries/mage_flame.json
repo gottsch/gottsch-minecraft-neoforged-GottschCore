@@ -2,21 +2,22 @@
   "name": "Mage Flame",
   "icon": "mageflame:mage_flame_scroll",
   "category": "mageflame:manual",
-  "sortnum": 0,
+  "sortnum": 1,
   "pages": [
     {
-      "type": "patchouli:entity",
-      "entity": "mageflame:mage_flame",
+      "type": "patchouli:spotlight",
       "title": "Mage Flame",
-      "scale": 0.85,
+      "item": {
+        "item": "mageflame:mage_flame_scroll"
+      },
       "anchor": "mage_flame",
-      "text": "$(o)The weakest of the summoned flames, well-suited for the apprentice spellcaster. It will allow you to see, but not as bright as a regular torch. It is not strong enough to navigate through vines and other replaceable blocks, and will extinguish if it is unable to follow its owner."
+      "text": "The weakest of the summoned flames, well-suited for the apprentice spellcaster. It will allow you to see, but not as bright as a regular torch. It is not strong enough to navigate through vines and other replaceable blocks, and will extinguish if it is unable to follow its owner.$(br)Brightness = 11$(br)Duration = 10 minutes"
     },
     {
       "type": "patchouli:crafting",
       "title": "Mage Flame Recipe",
       "recipe": "mageflame:mage_flame_scroll",
-      "text": "Allows the spellcaster to create a small ball of flames.$(br)Brightness = 9$(br)Duration = 10 minutes"
+      "text": "Allows the spellcaster to create a small ball of flames."
     }
   ]
 }

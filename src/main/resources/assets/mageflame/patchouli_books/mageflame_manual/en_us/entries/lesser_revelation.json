@@ -5,18 +5,19 @@
   "sortnum": 1,
   "pages": [
     {
-      "type": "patchouli:entity",
-      "entity": "mageflame:lesser_revelation",
+      "type": "patchouli:spotlight",
       "title": "Lesser Revelation",
-      "scale": 0.85,
-      "text": "$(o)A ball of magic-green fire. It has a more powerful light and increased lifespan.",
+      "item": {
+        "item": "mageflame:lesser_revelation_scroll"
+      },
+      "text": "Casts medium illumination (slightly less than a torch).$(br)Brightness = 13$(br)Duration = 15 minutes",
       "anchor": "lesser_revelation"
     },
     {
       "type": "patchouli:crafting",
       "title": "Lesser Revelation Recipe",
       "recipe": "mageflame:lesser_revelation_scroll",
-      "text": "A more powerful version of Mage Flame.$(br)Brightness = 11$(br)Duration = 15 minutes"
+      "text": ""
     }
   ]
 }

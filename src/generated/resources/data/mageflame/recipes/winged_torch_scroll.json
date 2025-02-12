@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:blaze_powder"
+    },
+    "e": {
+      "item": "minecraft:spider_eye"
+    },
+    "f": {
+      "item": "minecraft:feather"
+    },
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "s": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "t": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    " e ",
+    "ftf",
+    "spb"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mageflame:winged_torch_scroll"
+  }
+}

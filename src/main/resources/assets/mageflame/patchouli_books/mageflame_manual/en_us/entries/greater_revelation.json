@@ -2,21 +2,22 @@
   "name": "Greater Revelation",
   "icon": "mageflame:greater_revelation_scroll",
   "category": "mageflame:manual",
-  "sortnum": 2,
+  "sortnum": 1,
   "pages": [
     {
-      "type": "patchouli:entity",
-      "entity": "mageflame:greater_revelation",
-      "name": "Greater Revelation",
-      "scale": 0.85,
-      "text": "$(o)The spellcaster is able to channel a great amount of power to generate a large ball of magic-green fire. Brighter than a torch and has staying power. It also has enough power to destroy replaceable blocks.",
+      "type": "patchouli:spotlight",
+      "title": "Greater Revelation",
+      "item": {
+        "item": "mageflame:greater_revelation_scroll"
+      },
+      "text": "Casts full illumination.$(br)Brightness = 15$(br)Duration = 30 minutes",
       "anchor": "greater_revelation"
     },
     {
       "type": "patchouli:crafting",
       "title": "Greater Revelation Recipe",
       "recipe": "mageflame:greater_revelation_scroll",
-      "text": "The most powerful of the magical flames.$(br)Brightness = 13$(br)Duration = 30 minutes"
+      "text": ""
     }
   ]
 }

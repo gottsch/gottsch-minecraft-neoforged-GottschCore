@@ -1,7 +1,4 @@
-// 1.21.1	2025-02-11T22:38:12.028852	Item Models: mageflame
-c4fc5d6d746d427a0dbbb96ad9c7037c9010fc9c assets/mageflame/models/item/bubble_flame_scroll.json
-07d144712d176e0be0d710a6734d18ad9758c0cd assets/mageflame/models/item/ember_hound_scroll.json
-439623f36c2d7598347c3bd9b733d33c248b5851 assets/mageflame/models/item/glowglob_ball.json
+// 1.20.6	2025-01-09T10:52:44.4464721	Item Models: mageflame
 86d225d5e31ab4253833f36b7fa1018e78e050a4 assets/mageflame/models/item/greater_revelation_scroll.json
 67fae8f14e03161b5bd59888bdcdc8fdfe0720e4 assets/mageflame/models/item/lesser_revelation_scroll.json
 6b9dccc9602503ba66119847667b4d7af5646368 assets/mageflame/models/item/mage_flame_scroll.json
