@@ -19,9 +19,6 @@
  */
 package mod.gottsch.neo.gottschcore.spatial;
 
-import javax.annotation.concurrent.Immutable;
-
-
 import mod.gottsch.neo.gottschcore.GottschCore;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,6 +27,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
+
+import javax.annotation.concurrent.Immutable;
 
 /**
  * 
@@ -42,7 +41,27 @@ public class Coords implements ICoords {
 	private final int y;
 	private final int z;
 	
-	public static final Coords EMPTY = new Coords(0, -255, 0);
+	public static final ICoords EMPTY = Coords.of(0, -255, 0);
+
+	public static ICoords of(final int x, final int y, final int z) {
+		return new Coords(x, y, z);
+	}
+
+	public static ICoords of(ICoords coords) {
+		return new Coords(coords);
+	}
+
+	public static ICoords of(BlockPos pos) {
+		return new Coords(pos);
+	}
+
+	public static ICoords of(Vec3 vec) {
+		return new Coords(vec);
+	}
+
+	public static ICoords of(Vec3i vec) {
+		return new Coords(vec);
+	}
 
 	/**
 	 * 
@@ -50,6 +69,7 @@ public class Coords implements ICoords {
 	 * @param y
 	 * @param z
 	 */
+	@Deprecated
 	public Coords(final int x, final int y, final int z) {
 		this.x = x;
 		this.y = y;
@@ -60,6 +80,7 @@ public class Coords implements ICoords {
 	 * 
 	 * @param coords
 	 */
+	@Deprecated
 	public Coords(ICoords coords) {
 		this(coords.getX(), coords.getY(), coords.getZ());
 	}
@@ -69,10 +90,12 @@ public class Coords implements ICoords {
 	 * 
 	 * @param pos
 	 */
+	@Deprecated
 	public Coords(BlockPos pos) {
 		this(pos.getX(), pos.getY(), pos.getZ());
 	}
 
+	@Deprecated
 	public Coords(Vec3 vec) {
 		this(Mth.floor(vec.x), Mth.floor(vec.y), Mth.floor(vec.z));
 	}
@@ -82,6 +105,7 @@ public class Coords implements ICoords {
 	 * 
 	 * @param vec
 	 */
+	@Deprecated
 	public Coords(Vec3i vec) {
 		this(Mth.floor(vec.getX()), Mth.floor(vec.getY()), Mth.floor(vec.getZ()));
 	}
