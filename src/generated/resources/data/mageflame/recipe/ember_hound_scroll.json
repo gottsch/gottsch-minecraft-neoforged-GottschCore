@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:blaze_powder"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "s": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "t": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    " d ",
+    "ltl",
+    "spb"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mageflame:ember_hound_scroll"
+  }
+}

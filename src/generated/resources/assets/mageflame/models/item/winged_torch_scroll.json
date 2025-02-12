@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mageflame:item/winged_torch_scroll"
+  }
+}

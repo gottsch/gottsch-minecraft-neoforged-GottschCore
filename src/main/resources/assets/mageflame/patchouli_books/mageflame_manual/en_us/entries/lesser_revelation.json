@@ -1,0 +1,23 @@
+{
+  "name": "Lesser Revelation",
+  "icon": "mageflame:lesser_revelation_scroll",
+  "category": "mageflame:manual",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Lesser Revelation",
+      "item": {
+        "item": "mageflame:lesser_revelation_scroll"
+      },
+      "text": "Casts medium illumination (slightly less than a torch).$(br)Brightness = 13$(br)Duration = 15 minutes",
+      "anchor": "lesser_revelation"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Lesser Revelation Recipe",
+      "recipe": "mageflame:lesser_revelation_scroll",
+      "text": ""
+    }
+  ]
+}
