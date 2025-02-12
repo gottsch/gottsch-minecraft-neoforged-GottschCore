@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "mageflame:item/greater_revelation_scroll"
-  }
-}
