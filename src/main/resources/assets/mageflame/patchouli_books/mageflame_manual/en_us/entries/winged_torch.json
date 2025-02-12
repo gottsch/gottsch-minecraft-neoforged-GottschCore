@@ -2,22 +2,21 @@
   "name": "Winged Torch",
   "icon": "mageflame:winged_torch_scroll",
   "category": "mageflame:manual",
-  "sortnum": 1,
+  "sortnum": 4,
   "pages": [
     {
-      "type": "patchouli:spotlight",
+      "type": "patchouli:entity",
+      "entity": "mageflame:winged_torch",
       "title": "Winged Torch",
-      "item": {
-        "item": "mageflame:winged_torch_scroll"
-      },
-      "text": "Casts full illumination. Lasts indefinitely, until killed or unsummoned.$(br)Brightness = 15$(br)Duration = infinite",
+      "scale": 0.85,
+      "text": "$(o)The spellcaster is able reach into the astral plane and summon a winged torch. The torch will remain under your charge until you release it or it perishes.",
       "anchor": "winged_torch"
     },
     {
       "type": "patchouli:crafting",
       "title": "Winged Torch Recipe",
       "recipe": "mageflame:winged_torch_scroll",
-      "text": ""
+      "text": "Allows the spellcaster to summon a winged torch. Lasts indefinitely, until killed or dispelled.$(br)Brightness = 15$(br)Duration = infinite"
     }
   ]
 }

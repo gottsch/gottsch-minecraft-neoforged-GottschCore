@@ -1,0 +1,22 @@
+{
+  "name": "Glowglob",
+  "icon": "mageflame:glowglob_ball",
+  "category": "mageflame:manual",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "mageflame:glowglob",
+      "name": "Glowglob",
+      "scale": 0.85,
+      "text": "$(o)A weak stationary source of light. A glowglob ball can be thrown to cast light in hard to reach places.",
+      "anchor": "glowglob"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Glowglob Recipe",
+      "recipe": "mageflame:glowglob_ball",
+      "text": "Can be thrown to create a glowglob.$(br)Brightness = 9$(br)Duration = 10 minutes"
+    }
+  ]
+}

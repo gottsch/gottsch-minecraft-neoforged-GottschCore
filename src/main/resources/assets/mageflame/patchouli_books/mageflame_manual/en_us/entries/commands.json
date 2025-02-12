@@ -1,0 +1,14 @@
+{
+  "name": "Commands",
+  "icon": "minecraft:command_block",
+  "category": "mageflame:manual",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Kill Command",
+      "text": "Use $(bold)/mageflame dispel$() to dispel a single or all your summoned entities.",
+      "anchor": "kill_command"
+    }
+  ]
+}

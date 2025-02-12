@@ -1,0 +1,22 @@
+{
+  "name": "Bubble Flame",
+  "icon": "mageflame:bubble_flame_scroll",
+  "category": "mageflame:manual",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "mageflame:bubble_flame",
+      "name": "Bubble Flame",
+      "scale": 1,
+      "text": "$(o)Allows the spellcaster to conjure a Bubble Flame.",
+      "anchor": "bubble_flame"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Bubble Flame Recipe",
+      "recipe": "mageflame:bubble_flame_scroll",
+      "text": "A bright flame within its own air bubble. Able to travel underwater.$(br)Brightness = 14$(br)Duration = 45 minutes"
+    }
+  ]
+}

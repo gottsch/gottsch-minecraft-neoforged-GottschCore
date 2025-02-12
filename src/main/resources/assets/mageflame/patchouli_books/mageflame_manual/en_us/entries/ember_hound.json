@@ -1,0 +1,23 @@
+{
+  "name": "Ember Hound",
+  "icon": "mageflame:ember_hound_scroll",
+  "category": "mageflame:manual",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "mageflame:ember_hound",
+      "name": "Ember Hound",
+      "scale": 0.85,
+      "text": "",
+      "anchor": "ember_hound"
+    },
+    "$(o)The spellcaster is able reach into the nether plane and summon an Ember Hound. The hound will remain under your charge until you release it or it perishes. Ember Hounds will attack your enemies.",
+    {
+      "type": "patchouli:crafting",
+      "title": "Ember Hound Recipe",
+      "recipe": "mageflame:ember_hound_scroll",
+      "text": "Allows the spellcaster to summon an Ember Hound. Lasts indefinitely, until killed or dispelled.$(br)Brightness = 15$(br)Duration = infinite"
+    }
+  ]
+}
