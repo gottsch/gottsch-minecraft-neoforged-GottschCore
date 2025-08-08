@@ -29,7 +29,7 @@ import mod.gottsch.neo.gottschcore.GottschCore;
  */
 public class Interval<D> implements IInterval<D> {
 	
-	public static final Interval<?> EMPTY = new Interval<>(null, null, null);
+	public static final Interval<?> EMPTY = new Interval<>();
 	
 	private Integer start;
 	private Integer end;
@@ -45,8 +45,6 @@ public class Interval<D> implements IInterval<D> {
 	 * Empty constructor
 	 */
 	public Interval() {
-		start = EMPTY.getStart();
-		end = EMPTY.getEnd();
 	}
 	
 	/**
@@ -63,8 +61,8 @@ public class Interval<D> implements IInterval<D> {
 
 	/**
 	 * 
-	 * @param coords1
-	 * @param coords2
+	 * @param start
+	 * @param end
 	 * @param data
 	 */
 	public Interval(Integer start, Integer end, D data) {

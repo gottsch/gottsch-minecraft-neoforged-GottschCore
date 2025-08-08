@@ -35,59 +35,47 @@ public class BiomeHelper {
 		OK,
 		WHITE_LISTED,
 		BLACK_LISTED
-	}
+	};
 
-	public static Result isBiomeAllowed(Holder<Biome> biome, List<? extends String> whiteList, List<? extends String> blackList) {
-		if (whiteList != null && !whiteList.isEmpty()) {
-			for (String biomeName : whiteList) {
-				if (biome.is(ResourceLocation.parse(biomeName))) {
-					return Result.WHITE_LISTED;
-				}
-			}
-			// added in 1.15. If white list has values and biome is not in it, then by definition, it is black listed.
-			return Result.BLACK_LISTED;
-		}
-
-		if (blackList != null && !blackList.isEmpty()) {
-			for (String biomeName : blackList) {
-				if (biome.is(ResourceLocation.parse(biomeName))) {
-					return Result.BLACK_LISTED;
-				}
-			}
-		}
-
-		// neither white list nor black list have values = all biomes are valid
-		return Result.OK;
+	/**
+	 *
+	 * @param biomeHolder
+	 * @param whitelist
+	 * @param blacklist
+	 * @return
+	 */
+	public static Result isBiomeAllowed(Holder<Biome> biomeHolder, List<? extends String> whitelist, List<? extends String> blacklist) {
+		return isBiomeAllowed(biomeHolder.unwrapKey().orElseThrow().location(), whitelist, blacklist);
 	}
 
 	/**
 	 *
 	 * @param biome
-	 * @param whiteList
-	 * @param blackList
+	 * @param whitelist
+	 * @param blacklist
 	 * @return
 	 */
-	public static Result isBiomeAllowed(ResourceLocation biome, List<? extends String> whiteList, List<? extends String> blackList) {
-		if (whiteList != null && whiteList.size() > 0) {
-			for (String biomeName : whiteList) {
-				if (biomeName.equals(biome.toString())) {
-					return Result.WHITE_LISTED;
-				}
-			}
-			// added in 1.15. If white list has values and biome is not in it, then by definition, it is black listed.
-			return Result.BLACK_LISTED;
-		}
+	public static Result isBiomeAllowed(ResourceLocation biome, List<? extends String> whitelist, List<? extends String> blacklist) {
+        if (whitelist != null && whitelist.size() > 0) {
+        	for (String biomeName : whitelist) {
+	        	if (biomeName.equals(biome.toString())) {
+	        		return Result.WHITE_LISTED;
+	        	}
+	        }
+        	// added in 1.15. If white list has values and biome is not in it, then by definition, it is black listed.
+        	return Result.BLACK_LISTED;
+        }
 
-		if (blackList != null && blackList.size() > 0) {
-			for (String biomeName : blackList) {
-				if (biomeName.equals(biome.toString())) {
-					return Result.BLACK_LISTED;
-				}
-			}
-		}
+        if (blacklist != null && blacklist.size() > 0) {
+        	for (String biomeName : blacklist) {
+        		if (biomeName.equals(biome.toString())) {
+        			return Result.BLACK_LISTED;
+        		}
+        	}
+        }
 
-		// neither white list nor black list have values = all biomes are valid
-		return Result.OK;
+    	// neither white list nor black list have values = all biomes are valid
+    	return Result.OK;
 	}
 
 	/**

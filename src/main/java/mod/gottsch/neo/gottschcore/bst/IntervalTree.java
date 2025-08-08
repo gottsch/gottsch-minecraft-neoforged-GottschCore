@@ -1,7 +1,7 @@
 /*
  * This file is part of  GottschCore.
- * Copyright (c) 2022 Mark Gottschling (gottsch)
- * 
+ * Copyright (c) 2025 Mark Gottschling (gottsch)
+ *
  * All rights reserved.
  *
  * GottschCore is free software: you can redistribute it and/or modify
@@ -20,35 +20,10 @@
 package mod.gottsch.neo.gottschcore.bst;
 
 /**
- * 
- * @author Mark Gottschling on Sept 20, 2022
+ * default implementation uses an integer interval.
+ * @author Mark Gottschling on Jul 26, 2022
  *
  * @param <D>
  */
-public interface IInterval<D> extends Comparable<IInterval<D>> {
-
-	int getStart();
-	int getEnd();
-
-	Integer getMin();
-	void setMin(Integer min);
-
-	Integer getMax();
-	void setMax(Integer max);
-
-	IInterval<D> getLeft();
-	void setLeft(IInterval<D> left);
-
-	IInterval<D> getRight();
-	void setRight(IInterval<D> right);
-
-	D getData();
-	void setData(D data);
-
-	abstract int compareTo(IInterval<D> o);
-
-	default public boolean isOverlap(IInterval<D> target) {
-//		return !((getStart() > target.getEnd()) || (getEnd() < target.getStart()));
-		return getStart() <= target.getEnd() && getEnd() >= target.getStart();
-	}
+public class IntervalTree<D> extends AbstractIntervalTree<D> {
 }
