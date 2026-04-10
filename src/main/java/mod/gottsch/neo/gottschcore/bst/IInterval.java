@@ -1,7 +1,7 @@
 /*
  * This file is part of  GottschCore.
  * Copyright (c) 2022 Mark Gottschling (gottsch)
- * 
+ *
  * All rights reserved.
  *
  * GottschCore is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 package mod.gottsch.neo.gottschcore.bst;
 
 /**
- * 
+ *
  * @author Mark Gottschling on Sept 20, 2022
  *
  * @param <D>

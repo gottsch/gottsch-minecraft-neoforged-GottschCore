@@ -15,10 +15,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Treasure2.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
-package mod.gottsch.forge.gottschcore.config;
+package mod.gottsch.neo.gottschcore.config;
 
-import com.google.common.reflect.ClassPath;
-import mod.gottsch.forge.gottschcore.size.IntegerRange;
+import mod.gottsch.neo.gottschcore.size.IntegerRange;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ import java.util.List;
  * @author Mark Gottschling on Aug 16, 2024
  *
  */
+@Deprecated(forRemoval = true, since = "2.6.0")
 public class MobSetConfiguration {
 	List<MobSet> mobSets;
 	

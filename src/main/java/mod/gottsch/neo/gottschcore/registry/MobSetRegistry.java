@@ -1,7 +1,7 @@
-package mod.gottsch.forge.gottschcore.registry;
+package mod.gottsch.neo.gottschcore.registry;
 
 
-import mod.gottsch.forge.gottschcore.config.MobSetConfiguration;
+import mod.gottsch.neo.gottschcore.config.MobSetConfiguration;
 import mod.gottsch.neo.gottschcore.GottschCore;
 import mod.gottsch.neo.gottschcore.random.WeightedCollection;
 import net.minecraft.resources.ResourceLocation;

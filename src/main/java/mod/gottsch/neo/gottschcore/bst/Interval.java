@@ -22,7 +22,7 @@ package mod.gottsch.neo.gottschcore.bst;
 import mod.gottsch.neo.gottschcore.GottschCore;
 
 /**
- * 
+ * default implementation uses an integer interval.
  * @author Mark Gottschling on Jul 26, 2022
  *
  * @param <D>

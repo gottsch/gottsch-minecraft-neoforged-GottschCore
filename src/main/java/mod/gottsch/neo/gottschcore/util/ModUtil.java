@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GottschCore.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
-package mod.gottsch.forge.gottschcore.util;
+package mod.gottsch.neo.gottschcore.util;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;

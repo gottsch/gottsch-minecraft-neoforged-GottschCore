@@ -9,14 +9,21 @@ import java.util.Random;
  * @author Mark Gottschling on 6/1/2023
  */
 public class IntegerRange {
-    public static final IntegerRange EMPTY = new IntegerRange(0, 0);
-
     private int min;
     private int max;
 
+    public IntegerRange() {
+        this.min = 0;
+        this.max = 0;
+    }
+    
     public IntegerRange(int min, int max) {
         this.min = min;
         this.max = max;
+    }
+    public IntegerRange(IntegerRange source) {
+        setMin(source.getMin());
+        setMax(source.getMax());
     }
 
     public int getInRange() {

@@ -19,13 +19,18 @@
  */
 package mod.gottsch.neo.gottschcore.spatial;
 
+import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Direction;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import net.minecraft.core.Direction;
 
 /**
  * 
@@ -33,16 +38,34 @@ import net.minecraft.core.Direction;
  *
  */
 public enum Heading {
-	// @formatter:off
-	UP(Direction.UP), 
+	UP(Direction.UP),
 	DOWN(Direction.DOWN), 
 	NORTH(Direction.NORTH), 
 	SOUTH(Direction.SOUTH), 
 	WEST(Direction.WEST),
 	EAST(Direction.EAST);
-	// @formatter:on
 
 	private static final Map<Direction, Heading> mapByDirection = new HashMap<Direction, Heading>();
+
+	public static final Codec<Heading> CODEC = Direction.CODEC
+			// .xmap(Direction -> Heading) is for reading (decoding)
+			.xmap(
+					// Reader: takes a Direction (from Direction.CODEC) and converts it to a Heading
+					Heading::fromDirection,
+					// Writer: takes a Heading and converts it to a Direction (for Direction.CODEC to write)
+					Heading::getDirection
+			);
+
+	public static final StreamCodec<RegistryFriendlyByteBuf, Heading> STREAM_CODEC =
+			// cast the StreamCodec to the required buffer type (RegistryFriendlyByteBuf)
+			// before applying the mapping logic.
+			ByteBufCodecs.INT.<RegistryFriendlyByteBuf>cast()
+					.map(
+							// Decoder: int (index) -> Heading
+							Heading::getByIndex,
+							// Encoder: Heading -> int (index)
+							Heading::getIndex
+					);
 
 	/*
 	 * wrapped minecraft class
@@ -202,22 +225,7 @@ public enum Heading {
 	 * @return
 	 */
 	public static Heading fromDirection(Direction direction) {
-		switch (direction) {
-		case NORTH:
-			return Heading.NORTH;
-		case EAST:
-			return Heading.EAST;
-		case SOUTH:
-			return Heading.SOUTH;
-		case WEST:
-			return Heading.WEST;
-		case UP:
-			return Heading.UP;
-		case DOWN:
-			return Heading.DOWN;
-		default:
-			return Heading.NORTH;
-		}
+		return mapByDirection.getOrDefault(direction, Heading.NORTH);
 	}
 
 	public Direction getDirection() {
