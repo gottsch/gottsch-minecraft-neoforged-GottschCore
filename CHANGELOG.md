@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 2026-10-05
+
+### Added
+- CommandResponseFormatter, FormatterConstants and ReportBuilder (ported from the Forge 1.20.1 GottschCore). Shared chat formatting for mod commands: success/failure/warning/info messages, confirm prompts, and structured admin reports.
+- DimensionCoords (ported from the Forge 1.20.1 GottschCore). An immutable Coords that also carries a dimension key and saves/loads it.
+
+### Fixed
+- WaterloggedFacingHalfBlock now keeps WATERLOGGED on placement. getStateForPlacement discarded the result of setValue, so a block placed into water pushed the water out instead of waterlogging.
+
 ## [2.6.0] - 2026-03-26
 
 ### Changed
