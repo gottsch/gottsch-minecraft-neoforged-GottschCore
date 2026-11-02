@@ -29,9 +29,8 @@ import net.minecraft.world.level.block.Block;
  * and the chance of reaching it <em>given the previous stage was reached</em>.
  *
  * <p>The block is resolved by {@link BlockIds#CODEC}, so an unknown id is <strong>warned</strong>
- * at load. It still resolves to air and the stage still does nothing &mdash; this javadoc used to
- * claim the id "fails the datapack file loudly", and that was never true; see {@link BlockIds} for
- * why {@code byNameCodec()} cannot fail here.</p>
+ * at load rather than failing the datapack file. It resolves to air and the stage does nothing;
+ * see {@link BlockIds} for why a shared library takes that over vanilla's hard error.</p>
  *
  * @author Mark Gottschling on Jul 27, 2026
  */

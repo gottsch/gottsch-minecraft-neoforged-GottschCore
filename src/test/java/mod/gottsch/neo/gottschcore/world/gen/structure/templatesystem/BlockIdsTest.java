@@ -49,19 +49,18 @@ class BlockIdsTest {
     }
 
     /**
-     * <strong>The premise of the whole fix, asserted rather than asserted-in-prose.</strong>
-     * {@code byNameCodec()} reads as strict and is not: {@code BuiltInRegistries.BLOCK} is a
-     * defaulted registry, so an unknown id resolves to its default value instead of failing. If
-     * Mojang ever changes that, this test fails and {@link BlockIds} can be deleted.
+     * <strong>Why {@link BlockIds} exists on 1.21.1, asserted rather than asserted-in-prose.</strong>
+     * Here {@code byNameCodec()} looks the id up with {@code getHolder()}, so an unknown id is a
+     * hard decode error -- one that would fail a whole datapack over a block from a mod the player
+     * does not have. If Mojang ever makes it lenient again, this test fails and the class notes
+     * need revisiting.
      */
     @Test
-    void vanillasByNameCodecSilentlyResolvesAnUnknownIdToAir() {
+    void vanillasByNameCodecRejectsAnUnknownId() {
         DataResult<Block> result = BuiltInRegistries.BLOCK.byNameCodec()
                 .parse(JsonOps.INSTANCE, new com.google.gson.JsonPrimitive("dungeonblocks:mosy_bricks"));
 
-        assertTrue(result.error().isEmpty(), "expected vanilla to decode this cleanly");
-        assertSame(Blocks.AIR, result.result().orElseThrow(),
-                "and to hand back air, which is the bug");
+        assertTrue(result.error().isPresent(), "expected vanilla to reject an unregistered id");
     }
 
     /** The replacement keeps that lenient result -- GottschCore is shared, see the class notes. */

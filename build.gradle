@@ -90,6 +90,16 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
+// NeoForm's mergetool pulls ASM 9.5 onto the junit run's classpath while NeoForge loads ASM 9.7
+// on the module path, and the duplicate module stops the test JVM from starting. Align on 9.7.
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.ow2.asm') {
+            details.useVersion '9.7'
+        }
+    }
+}
+
 dependencies {
     // Specify the version of Minecraft to use.
     // Depending on the plugin applied there are several options. We will assume you applied the userdev plugin as shown above.
