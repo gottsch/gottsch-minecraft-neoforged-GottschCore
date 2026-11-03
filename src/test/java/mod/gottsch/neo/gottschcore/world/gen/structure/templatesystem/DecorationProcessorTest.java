@@ -17,9 +17,13 @@
  */
 package mod.gottsch.neo.gottschcore.world.gen.structure.templatesystem;
 
+import mod.gottsch.neo.gottschcore.block.FacingBlock;
+import mod.gottsch.neo.gottschcore.block.IFacingBlock;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.MappedRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.Bootstrap;
 import net.minecraft.world.level.EmptyBlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -297,6 +301,26 @@ class DecorationProcessorTest {
                                 + " pointed the web the wrong way after placement");
             }
         }
+    }
+
+    /**
+     * A web whose facing is GottschCore's own {@link IFacingBlock#FACING}, as DungeonBlocks' angle
+     * cobwebs are. {@link #web()} and {@link #halfWeb()} carry vanilla's properties, so they could not
+     * catch this: on 1.20.5+ a state's properties sit in a reference map, {@code hasProperty} became
+     * an identity test, and a lookup against {@code BlockStateProperties.FACING} stopped seeing this
+     * property. Every corner web was then silently dropped.
+     */
+    @Test
+    @SuppressWarnings("unchecked")
+    void aCornerWebWithGottschCoresOwnFacingIsPlaced() {
+        // Constructing a Block takes an intrusive holder in the frozen block registry.
+        ((MappedRegistry<Block>) BuiltInRegistries.BLOCK).unfreeze();
+        Block facingWeb = new FacingBlock(BlockBehaviour.Properties.of());
+
+        BlockState web = byPos(run(cornerCobwebs(1.0F, facingWeb), ceilingCorner())).get(AIR);
+
+        assertSame(facingWeb, web.getBlock(), "nothing was placed in the corner");
+        assertEquals(Direction.SOUTH, web.getValue(IFacingBlock.FACING));
     }
 
     @Test

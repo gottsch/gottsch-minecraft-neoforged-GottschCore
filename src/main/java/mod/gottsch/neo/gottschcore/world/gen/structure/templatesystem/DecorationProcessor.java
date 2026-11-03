@@ -35,7 +35,6 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.Property;
 import mod.gottsch.neo.gottschcore.GottschCore;
@@ -615,7 +614,7 @@ public class DecorationProcessor extends StructureProcessor implements LevelInde
 
     /** Sets {@code facing} if the block has one and the value is legal, else null. */
     private static BlockState withFacing(BlockState state, Direction facing) {
-        DirectionProperty property = facingPropertyOf(state);
+        Property<Direction> property = facingPropertyOf(state);
         if (property == null || !property.getPossibleValues().contains(facing)) {
             return null;
         }
@@ -661,16 +660,23 @@ public class DecorationProcessor extends StructureProcessor implements LevelInde
     /**
      * The block's {@code facing} property, or null if it has none.
      *
-     * <p>Two distinct properties share the name: the six-way {@link BlockStateProperties#FACING}
-     * and the four-way {@link BlockStateProperties#HORIZONTAL_FACING}. They are different objects,
-     * so {@code hasProperty} on one says nothing about the other and both have to be tried.</p>
+     * <p>Looked up by <strong>name</strong>, the way {@link #facingOf} reads one. Several distinct
+     * properties are called {@code facing}: the six-way {@link BlockStateProperties#FACING}, the
+     * four-way {@link BlockStateProperties#HORIZONTAL_FACING}, and {@code IFacingBlock.FACING},
+     * which GottschCore's own {@code FacingBlock} declares for itself. On 1.20.5+ a state keeps its
+     * properties in a reference map, so {@code hasProperty(BlockStateProperties.FACING)} is an
+     * IDENTITY test and is false for {@code IFacingBlock.FACING} &mdash; on 1.20.1 the map used
+     * {@code equals}, which matched. That is how DungeonBlocks' angle cobwebs, which are
+     * {@code FacingBlock}s, stopped being placed after the NeoForge port.</p>
      */
-    private static DirectionProperty facingPropertyOf(BlockState state) {
-        if (state.hasProperty(BlockStateProperties.FACING)) {
-            return BlockStateProperties.FACING;
+    @SuppressWarnings("unchecked")
+    private static Property<Direction> facingPropertyOf(BlockState state) {
+        for (Property<?> property : state.getProperties()) {
+            if (property.getName().equals("facing") && property.getValueClass() == Direction.class) {
+                return (Property<Direction>) property;
+            }
         }
-        return state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)
-                ? BlockStateProperties.HORIZONTAL_FACING : null;
+        return null;
     }
 
     /** Replaces water standing on a solid floor. Unlike the rest, this overwrites water, not air. */
