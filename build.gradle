@@ -63,6 +63,13 @@ runs {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
     }
 
+    // Runs the `test` task inside a NeoForge unit-test environment: FML loads the game and the
+    // registries before JUnit starts, so tests can use real Blocks/Items. The tests' own
+    // SharedConstants.tryDetectVersion() + Bootstrap.bootStrap() calls (kept from the Forge
+    // 1.20.1 GottschCore) are then no-ops.
+    junit {
+    }
+
     data {
         // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
         // workingDirectory project.file('run-data')
@@ -83,6 +90,16 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
+// NeoForm's mergetool pulls ASM 9.5 onto the junit run's classpath while NeoForge loads ASM 9.7
+// on the module path, and the duplicate module stops the test JVM from starting. Align on 9.7.
+configurations.configureEach {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.ow2.asm') {
+            details.useVersion '9.7'
+        }
+    }
+}
+
 dependencies {
     // Specify the version of Minecraft to use.
     // Depending on the plugin applied there are several options. We will assume you applied the userdev plugin as shown above.
@@ -91,6 +108,11 @@ dependencies {
     // And its provides the option to then use net.minecraft as the group, and one of; client, server or joined as the module name, plus the game version as version.
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
+
+    // JUnit 5. See the `junit` run above for how the game is booted for tests.
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -113,6 +135,13 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
